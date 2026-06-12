@@ -1,17 +1,34 @@
 import React from 'react';
 
-class ShowClass extends React.Component {
-    LangDefis = function(langs) {
-        return langs.join(', ');
-    }
+const ShowClass = ({ langs, unkLangs, setLangs, setUnknownLangs }) => {
+  
+  const handleKnownLangsChange = (event) => {
+    const newLangs = event.target.value.split(',').map(lang => lang.trim());
+    setLangs(newLangs); 
+  };
 
-    render() { 
-        return (
-            <>
-                <h2>I know: {this.props.langs.join(', ')}</h2>
-                <h2>I dont know: {this.LangDefis(["asm"])}</h2>
-            </>
-        );}
-}
+  const handleUnknownLangsChange = (event) => {
+    const newLangs = event.target.value.split(',').map(lang => lang.trim());
+    setUnknownLangs(newLangs); 
+  };
+
+  return (
+    <>
+      <h2>You know: {langs.join(', ')}</h2>
+      <input 
+        type="text" 
+        value={langs.join(', ')} 
+        onChange={handleKnownLangsChange} 
+      />
+      
+      <h2>You dont know: {unkLangs.join(', ')}</h2>
+      <input 
+        type="text" 
+        value={unkLangs.join(', ')} 
+        onChange={handleUnknownLangsChange} 
+      />
+    </>
+  );
+};
 
 export default ShowClass;

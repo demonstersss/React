@@ -1,7 +1,7 @@
 
 
 export default function ShowFunc({langs = []}) {
-    if(langs.length > 0)
+    if(langs.length > 1 || (langs.length === 1 && langs[0] !== ""))
         return(
             <>
                 <ul>
@@ -10,5 +10,5 @@ export default function ShowFunc({langs = []}) {
             </>
         )
     else
-        return "Я глупи(((";
+        return "Ти глупи(((";
 }

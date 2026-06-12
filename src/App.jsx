@@ -4,17 +4,21 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 
-import ShowNameAge from './components/ShowNameAge'
+import ShowStudentInfo from './components/ShowStudentInfo'
 import ShowClass from './components/ShowClass'
 import ShowFunc from './components/ShowFunc'
 import { ShowGames } from './components/ShowGames'
 
 
 function App() {
-  const Name = "Lesha";
-  const Age = 18;
-  const langs = ["JavaScript", "Python", "Java", "C++"];
-
+  const Student = {
+    name: "Яценко Алексей",
+    age: 18,
+    group: "П316"
+  };
+  const [langs, setLangs] = useState(["JavaScript", "Python", "Java", "C++"]);
+  const [unknownLangs, setUnknownLangs] = useState(["asm"]);
+  
   const games = [
     {id: 1, name: "The Witcher 3", genre: "RPG"},
     {id: 2, name: "Cyberpunk 2077", genre: "RPG"},
@@ -32,8 +36,13 @@ function App() {
         </div>
         
 
-        <ShowNameAge name={Name} age={Age} />
-        <ShowClass langs={langs} />
+        <ShowStudentInfo name={Student.name} age={Student.age} group={Student.group} />
+        <ShowClass 
+          langs={langs} 
+          unkLangs={unknownLangs} 
+          setLangs={setLangs} 
+          setUnknownLangs={setUnknownLangs} 
+        />
         <ShowFunc langs={langs} />
         <ShowGames games={games} />
 
