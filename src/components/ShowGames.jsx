@@ -5,23 +5,22 @@ export const ShowGames = ({ games = [] }) => {
     const [nextId, setNextId] = useState(() => 
         games.length > 0 ? Math.max(...games.map(g => g.id)) + 1 : 1
     );
-    
     const [editingId, setEditingId] = useState(null);
     const [draft, setDraft] = useState({ name: "", genre: "" });
 
-    const addCustom = (e) => {
+    const addGame = (e) => {
         e.preventDefault();
         const name = e.target.name.value.trim();
         const genre = e.target.genre.value.trim();
         if (!name || !genre) return;
         
         const newGame = { id: nextId, name, genre };
-        setLocalGames((s) => [newGame, ...s]);
+        setLocalGames((s) => [...s, newGame]);
         setNextId((n) => n + 1);
         e.target.reset();
     };
 
-    const remove = (id) => setLocalGames((s) => s.filter((x) => x.id !== id));
+    const remove = (id) => setLocalGames((s) => s.filter((g) => g.id !== id));
 
     const startEdit = (game) => {
         setEditingId(game.id);
@@ -38,14 +37,14 @@ export const ShowGames = ({ games = [] }) => {
         const genre = draft.genre.trim();
         if (!name || !genre) return;
         
-        setLocalGames((s) => s.map((it) => (it.id === id ? { ...it, name, genre } : it)));
+        setLocalGames((s) => s.map((g) => (g.id === id ? { ...g, name, genre } : g)));
         cancelEdit();
     };
 
     return (
-        <div>
-            <form onSubmit={addCustom}>
-                <input name="name" placeholder="Название"  />
+        <>
+            <form onSubmit={addGame} style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+                <input name="name" placeholder="Название" />
                 <input name="genre" placeholder="Жанр" />
                 <button type="submit">Добавить</button>
             </form>
@@ -54,17 +53,16 @@ export const ShowGames = ({ games = [] }) => {
                 <table>
                     <thead>
                         <tr>
-                            <th >ID</th>
-                            <th >Name</th>
-                            <th >Genre</th>
-                            <th >Action</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Genre</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {localGames.map((game) => (
-                            <tr key={game.id} >
+                            <tr key={game.id}>
                                 <td>{game.id}</td>
-                                
                                 <td>
                                     {editingId === game.id ? (
                                         <input
@@ -75,7 +73,6 @@ export const ShowGames = ({ games = [] }) => {
                                         game.name
                                     )}
                                 </td>
-                                
                                 <td>
                                     {editingId === game.id ? (
                                         <input
@@ -86,17 +83,24 @@ export const ShowGames = ({ games = [] }) => {
                                         game.genre
                                     )}
                                 </td>
-                                
-                                <td style={{ padding: 8 }}>
+                                <td>
                                     {editingId === game.id ? (
                                         <>
-                                            <button onClick={() => saveEdit(game.id)}>Сохранить</button>
-                                            <button onClick={cancelEdit}>Отменить</button>
+                                            <button onClick={() => saveEdit(game.id)} style={{ marginRight: 8 }}>
+                                                Сохранить
+                                            </button>
+                                            <button onClick={cancelEdit}>
+                                                Отменить
+                                            </button>
                                         </>
                                     ) : (
                                         <>
-                                            <button onClick={() => startEdit(game)}>Изменить</button>
-                                            <button onClick={() => remove(game.id)}>Удалить</button>
+                                            <button onClick={() => startEdit(game)} style={{ marginRight: 8 }}>
+                                                Изменить
+                                            </button>
+                                            <button onClick={() => remove(game.id)}>
+                                                Удалить
+                                            </button>
                                         </>
                                     )}
                                 </td>
@@ -105,8 +109,8 @@ export const ShowGames = ({ games = [] }) => {
                     </tbody>
                 </table>
             ) : (
-                "няма игри((("
+                <div>няма игри(((</div>
             )}
-        </div>
+        </>
     );
 };
