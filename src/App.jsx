@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
@@ -9,6 +9,9 @@ import ShowClass from './components/ShowClass'
 import ShowFunc from './components/ShowFunc'
 import { ShowGames } from './components/ShowGames' // dz3 
 import { Timer } from './components/Timer'; // dz4
+
+import { ThemeContext } from './ThemeContext.jsx'; // dz5
+
 
 function App() {
   const Student = {
@@ -31,15 +34,23 @@ function App() {
   // dz4
   const [showTimer, setShowTimer] = useState(true);
 
+
+  // dz5
+  const { theme, setTheme } = useContext(ThemeContext);  
   return (
     <>
       <section id="center">
+        <button onClick={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}>
+          Переключить на {theme === 'dark' ? 'светлую' : 'темную'} тему
+        </button>
+        
         <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
           <img src={reactLogo} className="framework" alt="React logo" />
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         
+
 
         <ShowStudentInfo name={Student.name} age={Student.age} group={Student.group} />
         <ShowClass 
