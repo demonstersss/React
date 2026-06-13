@@ -111,6 +111,7 @@ export const ShowGames = ({ games = [] }) => {
             ) : (
                 <div>няма игри(((</div>
             )}
+            <hr width="700px" />
         </>
     );
 };

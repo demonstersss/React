@@ -7,8 +7,8 @@ import './App.css'
 import ShowStudentInfo from './components/ShowStudentInfo'
 import ShowClass from './components/ShowClass'
 import ShowFunc from './components/ShowFunc'
-import { ShowGames } from './components/ShowGames'
-
+import { ShowGames } from './components/ShowGames' // dz3 
+import { Timer } from './components/Timer'; // dz4
 
 function App() {
   const Student = {
@@ -19,12 +19,17 @@ function App() {
   const [langs, setLangs] = useState(["JavaScript", "Python", "Java", "C++"]);
   const [unknownLangs, setUnknownLangs] = useState(["asm"]);
   
+
+  // dz3
   const games = [
     {id: 1, name: "The Witcher 3", genre: "RPG"},
     {id: 2, name: "Cyberpunk 2077", genre: "RPG"},
     {id: 3, name: "Minecraft", genre: "Sandbox"},
     {id: 4, name: "Spider-man", genre: "Action"},
   ]
+
+  // dz4
+  const [showTimer, setShowTimer] = useState(true);
 
   return (
     <>
@@ -45,6 +50,12 @@ function App() {
         />
         <ShowFunc langs={langs} />
         <ShowGames games={games} />
+        
+        <button onClick={() => setShowTimer(!showTimer)}>
+            {showTimer ? 'Скрыть таймер' : 'Показать таймер'}
+        </button>
+
+        {showTimer && <Timer />}
 
       </section>
 
