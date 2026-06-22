@@ -12,6 +12,7 @@ import { Timer } from './components/Timer'; // dz4
 
 import { ThemeContext } from './ThemeContext.jsx'; // dz5
 
+import { RefTasks } from './components/RefTasks';
 
 function App() {
   const Student = {
@@ -37,6 +38,9 @@ function App() {
 
   // dz5
   const { theme, setTheme } = useContext(ThemeContext);  
+
+  // dz6
+  const [count, setCount] = useState(0);
   return (
     <>
       <section id="center">
@@ -67,6 +71,8 @@ function App() {
         </button>
 
         {showTimer && <Timer />}
+
+        <RefTasks />
 
       </section>
 

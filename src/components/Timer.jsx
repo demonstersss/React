@@ -15,6 +15,9 @@ export const Timer = () => {
     }, []); 
 
     return (
-        <h3>Таймер (счётчик): {seconds} сек.</h3>
+        <>
+            <h3>Таймер (счётчик): {seconds} сек.</h3>
+            <hr width="700px" />
+        </>
     );
 };
